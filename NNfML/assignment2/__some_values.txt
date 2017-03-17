@@ -1,0 +1,28 @@
+This was created by me.
+
+Defaults
+
+Average Training CE 2.538
+
+Final Training CE 2.538
+Final Validation CE 2.602
+Final Test CE 2.616
+Training took 929.58 seconds
+
+Learning rate 100
+
+Average Train with 0 weights: 2017.8
+
+
+10 nearest could
+
+should 3.37
+can 3.47
+would 4.11
+might 4.25
+may 4.36
+will 4.60
+until 4.66
+companies 4.84
+also 5.00
+city 5.05
