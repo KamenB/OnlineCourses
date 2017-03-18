@@ -14,6 +14,7 @@ from keras.models import load_model
 import tensorflow as tf
 import tf_util
 import keras.backend.tensorflow_backend as K
+import time
 
 def main():
     import argparse
@@ -55,6 +56,7 @@ def main():
                 if steps % 100 == 0: print("%i/%i"%(steps, max_steps))
                 if steps >= max_steps:
                     break
+                time.sleep(0.01)
             returns.append(totalr)
 
         print('returns', returns)

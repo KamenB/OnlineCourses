@@ -59,6 +59,7 @@ def main():
                 if steps % 100 == 0: print("%i/%i"%(steps, max_steps))
                 if steps >= max_steps:
                     break
+                time.sleep(0.01)
             returns.append(totalr)
 
         print('returns', returns)
@@ -71,7 +72,7 @@ def main():
         # print(expert_data['observations'].shape, expert_data['observations'].shape)
 
         # Save expert data
-        pickle.dump(expert_data, open("expert_data/" + args.expert_policy_file.split("/")[-1], "wb"))
+        # pickle.dump(expert_data, open("expert_data/" + args.expert_policy_file.split("/")[-1], "wb"))
 
 if __name__ == '__main__':
     main()

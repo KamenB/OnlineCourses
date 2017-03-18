@@ -10,7 +10,6 @@ import matplotlib.pyplot as plt
 def normalize(train):
     mean, std = train.mean(), train.std()
     train = (train - mean) / std
-    print(mean, std)
     return train
 
 def shuffle_datset(X, Y):
@@ -30,7 +29,7 @@ def plot_history(history):
 
 def init_model(D, A):
     model = Sequential()
-    model.add(Dense(128, input_dim=D, activation='relu', weights = [np.random.randn(D, 128), np.random.randn(128)]))
+    model.add(Dense(128, input_dim=D, activation='relu'))
     model.add(Dense(A))
     model.compile(loss='mean_squared_error', optimizer='adam')
     return model
@@ -55,10 +54,10 @@ def main():
     X, Y = expert_data['observations'], expert_data['actions']
 
     # Shuffle dataset
-    X, Y = shuffle_datset(X, Y)
+    # X, Y = shuffle_datset(X, Y)
 
     # Normalize dataset
-    X = normalize(X)
+    # X = normalize(X)
 
     N, D = X.shape
     A = Y.shape[2]
@@ -66,14 +65,14 @@ def main():
     # Reshape Y from (N, 1, A) to (N, A)
     Y = Y.reshape(N, A)
 
-    trainX, trainY, valX, valY, testX, testY = split_dataset(X, Y, 50, 25)
+    trainX, trainY, valX, valY, testX, testY = split_dataset(X, Y, 70, 30)
 
     model = init_model(D, A)
 
-    history = model.fit(trainX, trainY, nb_epoch=100, batch_size=100, verbose=2, validation_data=(valX, valY))
+    history = model.fit(trainX, trainY, epochs=100, batch_size=100, verbose=2, validation_data=(valX, valY))
     # plot_history(history)
 
-    clone_url = "clones/" + args.expert_data_file.split("/")[-1].split(".")[0] + "_1.h5"
+    clone_url = "clones/" + args.expert_data_file.split("/")[-1].split(".")[0] + ".h5"
     model.save(clone_url)
 
 if __name__ == '__main__':

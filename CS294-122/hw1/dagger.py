@@ -25,7 +25,7 @@ def dagger_iter(expert_policy_fn, dagger_policy_fn, env, args):
     dagger_actions = []
     expert_actions = []
     for i in range(args.num_rollouts):
-        # print('Rollout iter', i)
+        print('Rollout iter', i)
         obs = env.reset()
         done = False
         totalr = 0.
@@ -95,7 +95,7 @@ def main():
 
             trainX, trainY, valX, valY, testX, testY = split_dataset(X, Y, 80, 20)
 
-            dagger_model.fit(trainX, trainY, nb_epoch=100, batch_size=100, verbose=2, validation_data=(valX, valY))
+            dagger_model.fit(trainX, trainY, epochs=100, batch_size=1000, verbose=2, validation_data=(valX, valY))
 
         clone_url = "dagger_clones/" + args.expert_policy_file.split("/")[-1].split(".")[0] + ".h5"
         dagger_model.save(clone_url)
